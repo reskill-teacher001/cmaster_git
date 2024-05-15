@@ -52,6 +52,8 @@ public class BbsServlet extends HttpServlet {
 		out.println("<input type=\"submit\" value=\"書き込み\">");
 		out.println("</form>");
 		out.println("<hr>");
+		out.println(message + "<br>");
+		out.println("<hr>");
 		out.println("</body>");
 		out.println("</html>");
 	}
