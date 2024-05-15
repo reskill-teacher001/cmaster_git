@@ -36,13 +36,14 @@ public class BbsServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		//送信データを取得
+		String name = request.getParameter("NAME");
 		String message = request.getParameter("MESSAGE");
 		
 		if (list == null) {
 			list = new ArrayList<>();
 		}
 		
-		list.add(message);
+		list.add(name + "：" + message);
 		
 		//Webブラウザへのお知らせ情報の設定
 		response.setContentType("text/html; charset=UTF-8");
@@ -56,6 +57,9 @@ public class BbsServlet extends HttpServlet {
 		out.println("</head>");
 		out.println("<body>");
 		out.println("<form action=\"/cmaster/BbsServlet\" method=\"post\">");
+		out.println("名前：<br>");
+		out.println("<input type=\"text\" name=\"NAME\">");
+		out.println("<br>");
 		out.println("メッセージ：<br>");
 		out.println("<textarea name=\"MESSAGE\" cols=\"30\" rows=\"5\"></textarea>");
 		out.println("<br>");
