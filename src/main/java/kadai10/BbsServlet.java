@@ -2,6 +2,8 @@ package kadai10;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/BbsServlet")
 public class BbsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private List<String> list;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -34,6 +38,12 @@ public class BbsServlet extends HttpServlet {
 		//送信データを取得
 		String message = request.getParameter("MESSAGE");
 		
+		if (list == null) {
+			list = new ArrayList<>();
+		}
+		
+		list.add(message);
+		
 		//Webブラウザへのお知らせ情報の設定
 		response.setContentType("text/html; charset=UTF-8");
 		
@@ -52,8 +62,12 @@ public class BbsServlet extends HttpServlet {
 		out.println("<input type=\"submit\" value=\"書き込み\">");
 		out.println("</form>");
 		out.println("<hr>");
-		out.println(message + "<br>");
-		out.println("<hr>");
+		
+		for (String msg : list) {
+			out.println(msg + "<br>");
+			out.println("<hr>");
+		}
+		
 		out.println("</body>");
 		out.println("</html>");
 	}
