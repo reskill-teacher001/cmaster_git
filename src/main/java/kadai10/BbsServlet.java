@@ -2,6 +2,8 @@ package kadai10;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,7 @@ public class BbsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private List<String> list;
-       
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -43,7 +45,10 @@ public class BbsServlet extends HttpServlet {
 			list = new ArrayList<>();
 		}
 		
-		list.add(name + "：" + message);
+		LocalDateTime now = LocalDateTime.now();
+		DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		
+		list.add(now.format(f) + "　" + name + "：" + message);
 		
 		//Webブラウザへのお知らせ情報の設定
 		response.setContentType("text/html; charset=UTF-8");
