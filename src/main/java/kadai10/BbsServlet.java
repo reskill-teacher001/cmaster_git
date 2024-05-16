@@ -69,23 +69,29 @@ public class BbsServlet extends HttpServlet {
 		out.println("<title>掲示板</title>");
 		out.println("</head>");
 		out.println("<body>");
-		out.println("<form action=\"/cmaster/BbsServlet\" method=\"post\">");
-		out.println("<input type=\"hidden\" name=\"action\" value=\"write\">");
-		out.println("名前：<br>");
-		out.println("<input type=\"text\" name=\"NAME\">");
-		out.println("<br>");
-		out.println("メッセージ：<br>");
-		out.println("<textarea name=\"MESSAGE\" cols=\"30\" rows=\"5\"></textarea>");
-		out.println("<br>");
-		out.println("<input type=\"submit\" value=\"書き込み\">");
-		out.println("</form>");
-		out.println("<hr>");
 		
-		int num = 0;
-		
-		for (String msg : list) {
-			out.println(msg + "[" + "<a href='/cmaster/BbsServlet?action=remove&num=" + num++ + "'>削除</a>" + "]" + "<br>");
+		if (action.equals("write") || action.equals("remove")) {
+			out.println("<form action=\"/cmaster/BbsServlet\" method=\"post\">");
+			out.println("<input type=\"hidden\" name=\"action\" value=\"write\">");
+			out.println("名前：<br>");
+			out.println("<input type=\"text\" name=\"NAME\">");
+			out.println("<br>");
+			out.println("メッセージ：<br>");
+			out.println("<textarea name=\"MESSAGE\" cols=\"30\" rows=\"5\"></textarea>");
+			out.println("<br>");
+			out.println("<input type=\"submit\" value=\"書き込み\">");
+			out.println("</form>");
 			out.println("<hr>");
+		
+			int num = 0;
+		
+			for (String msg : list) {
+				out.println(msg + "[" + "<a href='/cmaster/BbsServlet?action=remove&num=" + num++ + "'>削除</a>" + "]" + "<br>");
+				out.println("<hr>");
+			}
+		} else {
+			out.println("操作エラー<br>");
+			out.println("<a href='/cmaster/kadai10/bbs.html'>戻る</a><br>");
 		}
 		
 		out.println("</body>");
