@@ -53,9 +53,9 @@ public class BbsServlet extends HttpServlet {
 		
 			list.add(now.format(f) + "　" + name + "：" + message);
 		} else if (action.equals("remove")) {
-			int num = Integer.parseInt(request.getParameter("nun"));
+			int number = Integer.parseInt(request.getParameter("num"));
 			
-			list.remove(num);
+			list.remove(number);
 		}
 		
 		//Webブラウザへのお知らせ情報の設定
