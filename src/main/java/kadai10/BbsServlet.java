@@ -38,6 +38,8 @@ public class BbsServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		//送信データを取得
+		String action = request.getParameter("action");
+		
 		String name = request.getParameter("NAME");
 		String message = request.getParameter("MESSAGE");
 		
@@ -45,10 +47,16 @@ public class BbsServlet extends HttpServlet {
 			list = new ArrayList<>();
 		}
 		
-		LocalDateTime now = LocalDateTime.now();
-		DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		if (action.equals("write")) {
+			LocalDateTime now = LocalDateTime.now();
+			DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 		
-		list.add(now.format(f) + "　" + name + "：" + message);
+			list.add(now.format(f) + "　" + name + "：" + message);
+		} else if (action.equals("remove")) {
+			int num = Integer.parseInt(request.getParameter("nun"));
+			
+			list.remove(num);
+		}
 		
 		//Webブラウザへのお知らせ情報の設定
 		response.setContentType("text/html; charset=UTF-8");
@@ -62,6 +70,7 @@ public class BbsServlet extends HttpServlet {
 		out.println("</head>");
 		out.println("<body>");
 		out.println("<form action=\"/cmaster/BbsServlet\" method=\"post\">");
+		out.println("<input type=\"hidden\" name=\"action\" value=\"write\">");
 		out.println("名前：<br>");
 		out.println("<input type=\"text\" name=\"NAME\">");
 		out.println("<br>");
@@ -72,13 +81,19 @@ public class BbsServlet extends HttpServlet {
 		out.println("</form>");
 		out.println("<hr>");
 		
+		int num = 0;
+		
 		for (String msg : list) {
-			out.println(msg + "<br>");
+			out.println(msg + "[" + "<a href='/cmaster/BbsServlet?action=remove&num=" + num++ + "'>削除</a>" + "]" + "<br>");
 			out.println("<hr>");
 		}
 		
 		out.println("</body>");
 		out.println("</html>");
+	}
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
 	}
 
 }
