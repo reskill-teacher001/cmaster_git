@@ -11,6 +11,14 @@
 <h1>Step3</h1>
 
 <%
+//文字化け対策
+request.setCharacterEncoding("UTF-8");
+
+//リクエストパラメータを取得
+String name = request.getParameter("name");
+%>
+
+<%
 	Random rand = new Random();
 	int num = rand.nextInt(6) + 1;
 	
@@ -30,8 +38,8 @@
 
 %>
 
-<div>スクリプトレットを使用しておみくじ</div>
+<div>リクエストパラメータを取得しておみくじ結果を表示</div>
 <br>
-今日の運勢は、、、「<%= result %>」です。
+<%= name %>さんの今日の運勢は、、、「<%= result %>」です。
 </body>
 </html>

@@ -14,7 +14,7 @@
 <br>
 
 <%
-Random rand = new Random();
+	Random rand = new Random();
 
 	for (int month = 1; month <= 12; month++) {
 		int num = rand.nextInt(6) + 1;
