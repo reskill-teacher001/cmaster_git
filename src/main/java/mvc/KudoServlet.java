@@ -31,14 +31,10 @@ public class KudoServlet extends HttpServlet {
 		//文字化け対策
 		request.setCharacterEncoding("UTF-8");
 		
-		//リクエスト・パラメータを取得
-		int data1 = Integer.parseInt(request.getParameter("data1"));
-		int data2 = Integer.parseInt(request.getParameter("data2"));
-		
 		//モデル（Tanaka）のインスタンスを生成
 		Tanaka t = new Tanaka();
 		
-		int result = t.tasu(data1, data2);
+		int result = t.tasu(request);
 		
 		//加算結果をJSPで表示できる準備
 		request.setAttribute("result", result);
