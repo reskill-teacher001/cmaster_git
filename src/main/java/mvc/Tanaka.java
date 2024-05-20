@@ -2,8 +2,8 @@ package mvc;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class Tanaka {
-	public String tasu(HttpServletRequest request) throws CanonException {
+public class Tanaka implements Canon {
+	public String calc(HttpServletRequest request) throws CanonException {
 		try {
 			//リクエスト・パラメータを取得
 			int x = Integer.parseInt(request.getParameter("data1"));

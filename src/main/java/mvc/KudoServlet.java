@@ -36,13 +36,15 @@ public class KudoServlet extends HttpServlet {
 		
 		String page = "/mvc/kikusui.jsp";
 		
+		Canon c = null;
+		
 		try {
 			if (action.equals("tasu")) {
-				Tanaka t = new Tanaka();
-				page = t.tasu(request);
+				c = new Tanaka();
+				page = c.calc(request);
 			} else if (action.equals("hiku")) {
-				Kimura k = new Kimura();
-				page = k.hiku(request);
+				c = new Kimura();
+				page = c.calc(request);
 			}
 		} catch (Exception e) {
 			request.setAttribute("error", e.getMessage());
