@@ -34,10 +34,10 @@ public class KudoServlet extends HttpServlet {
 		//モデル（Tanaka）のインスタンスを生成
 		Tanaka t = new Tanaka();
 		
-		t.tasu(request);
+		String page = t.tasu(request);
 		
 		//リクエスト転送
-		RequestDispatcher rd = request.getRequestDispatcher("/mvc/honma.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher(page);
 		rd.forward(request, response);
 	}
 
