@@ -31,10 +31,15 @@ public class KudoServlet extends HttpServlet {
 		//文字化け対策
 		request.setCharacterEncoding("UTF-8");
 		
-		//モデル（Tanaka）のインスタンスを生成
-		Tanaka t = new Tanaka();
+		String page = "/mvc/kikusui.jsp";
 		
-		String page = t.tasu(request);
+		try {
+			//モデル（Tanaka）のインスタンスを生成
+			Tanaka t = new Tanaka();
+			page = t.tasu(request);
+		} catch (Exception e) {
+			request.setAttribute("error", e.getMessage());
+		}
 		
 		//リクエスト転送
 		RequestDispatcher rd = request.getRequestDispatcher(page);
