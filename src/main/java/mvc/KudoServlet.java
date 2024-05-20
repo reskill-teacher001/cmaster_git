@@ -31,12 +31,19 @@ public class KudoServlet extends HttpServlet {
 		//文字化け対策
 		request.setCharacterEncoding("UTF-8");
 		
+		//リクエスト・パラメータを取得
+		String action = request.getParameter("action");
+		
 		String page = "/mvc/kikusui.jsp";
 		
 		try {
-			//モデル（Tanaka）のインスタンスを生成
-			Tanaka t = new Tanaka();
-			page = t.tasu(request);
+			if (action.equals("tasu")) {
+				Tanaka t = new Tanaka();
+				page = t.tasu(request);
+			} else if (action.equals("hiku")) {
+				Kimura k = new Kimura();
+				page = k.hiku(request);
+			}
 		} catch (Exception e) {
 			request.setAttribute("error", e.getMessage());
 		}
