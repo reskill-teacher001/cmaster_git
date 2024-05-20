@@ -49,7 +49,8 @@ public class BbsServlet2 extends HttpServlet {
 		}
 		
 		list.add(name + "：" + message);
-		
+		//session.setAttribute("list", list);
+	
 		RequestDispatcher rd = request.getRequestDispatcher("/ShowServlet");
 		rd.forward(request, response);
 		
