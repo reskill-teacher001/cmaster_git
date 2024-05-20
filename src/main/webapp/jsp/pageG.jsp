@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.List, java.util.ArrayList"%>
+<%@ page import="java.util.Map, java.util.HashMap"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -10,7 +12,7 @@
 <body>
 <%
 String[] canon = {"椿", "東海林", "小川"};
-request.setAttribute("canon", canon);
+request.setAttribute("CANON", canon);
 
 List<Integer> list = new ArrayList<>();
 list.add(10);
@@ -24,17 +26,21 @@ map.put("BBB", 200);
 map.put("CCC", 300);
 request.setAttribute("MAP", map);
 %>
-${canon[0]}<br>
-${canon[1]}<br>
-${canon[2]}<br>
+
+<c:forEach var="can" items="${CANON}" varStatus="num">
+	${num.index}・・・${can}<br>
+</c:forEach>
 <hr>
-${LIST[0]}<br>
-${LIST[1]}<br>
-${LIST[2]}<br>
+<c:forEach var="data" items="${LIST}">
+	${data}<br>
+</c:forEach>
 <hr>
 ${MAP["AAA"]}<br>
 ${MAP.BBB}<br>
 ${MAP.CCC}<br>
+<c:forEach var="data" items="${MAP}">
+	${data.key}・・・${data.value}<br>
+</c:forEach>
 
 </body>
 </html>
